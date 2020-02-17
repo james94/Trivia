@@ -22,7 +22,7 @@ public class QuestionBank {
     ArrayList<Question> questionArrayList = new ArrayList<>();
     private String url = "https://raw.githubusercontent.com/curiousily/simple-quiz/master/script/statements-data.json";
 
-    public List<Question> getQuestions() {
+    public List<Question> getQuestions(final AnswerListAsyncResponse callBack) {
 
         // Fetch json data
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
@@ -42,12 +42,16 @@ public class QuestionBank {
 
                                 // Add question objects to array list
                                 questionArrayList.add(question);
+                                //Log.d("Hello", "onResponse: " + question.getAnswer());
 
                                 //Log.d("JSON", "onResponse: " + response.getJSONArray(i).get(0));
                                 //Log.d("JSON2", "onResponse: " + response.getJSONArray(i).getBoolean(1));
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
+                        }
+                        if(null != callBack) {
+                            callBack.processFinished(questionArrayList);
                         }
                     }
                 }, new Response.ErrorListener() {
