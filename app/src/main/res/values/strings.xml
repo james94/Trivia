@@ -6,4 +6,6 @@
     <string name="previous_button">previous_button</string>
     <string name="next_button">next_button</string>
     <string name="counter_questions">0 out of 100</string>
+    <string name="correct_answer">Correct!</string>
+    <string name="wrong_correct">Wrong!</string>
 </resources>
