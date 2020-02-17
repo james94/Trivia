@@ -10,6 +10,7 @@ import com.guzmanx.trivia.controller.AppController;
 import com.guzmanx.trivia.model.Question;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +32,23 @@ public class QuestionBank {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.d("JSON Stuff", "onResponse: " + response);
+                        //Log.d("JSON Stuff", "onResponse: " + response);
+                        for(int i = 0; i < response.length(); i++) {
+                            try {
+                                // Create question object with question and true/false
+                                Question question = new Question();
+                                question.setAnswer(response.getJSONArray(i).get(0).toString());
+                                question.setAnswerTrue(response.getJSONArray(i).getBoolean(1));
+
+                                // Add question objects to array list
+                                questionArrayList.add(question);
+
+                                //Log.d("JSON", "onResponse: " + response.getJSONArray(i).get(0));
+                                //Log.d("JSON2", "onResponse: " + response.getJSONArray(i).getBoolean(1));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -42,6 +59,6 @@ public class QuestionBank {
         );
         AppController.getInstance().addToRequestQueue(jsonArrayRequest);
 
-        return null;
+        return questionArrayList;
     }
 }
