@@ -35,6 +35,7 @@
             android:id="@+id/question_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:text="TextView"
             android:textSize="18sp"
             tools:text="Hello There this is where we are going to add something..." />
