@@ -24,7 +24,7 @@ public class QuestionBank {
 
     public List<Question> getQuestions(final AnswerListAsyncResponse callBack) {
 
-        // Fetch json data
+        // Fetch json data, request is asynchronous, so need to do a check data is ready to be sent
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
                 url,
